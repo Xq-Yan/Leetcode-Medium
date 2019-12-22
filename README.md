@@ -1,0 +1,2 @@
+# Leetcode-Medium
+Leetcode medium
