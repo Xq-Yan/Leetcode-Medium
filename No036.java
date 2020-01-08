@@ -53,7 +53,7 @@ The given board size is always 9x9.
 
 class Solution {
     public boolean isValidSudoku(char[][] board) {
-        for (int i = 0; i < 9; i++) {
+        /*for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] == '.') continue;
                 for (int m = 8; m > j; m--) {
@@ -67,6 +67,37 @@ class Solution {
                         if (board[i][j] == board[m][n]) return false;
                     }
                 }
+            }
+        }
+        return true;*/
+      
+      HashSet<Character> row = new HashSet<>();
+        HashSet<Character> col = new HashSet<>();
+        HashSet<Character> box = new HashSet<>();
+        int count1 = 0, count2 = 0, count3 = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if ('.' != board[i][j]) {
+                    count1++;
+                    row.add(board[i][j]);
+                }
+                if ('.' != board[j][i]) {
+                    count2++;
+                    col.add(board[j][i]);
+                }
+                if ('.' != board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]) {
+                    count3++;
+                    box.add(board[i / 3 * 3 + j / 3][i % 3 * 3 + j % 3]);
+                }
+            }
+            if (count1 != row.size() || count2 != col.size() || count3 != box.size()) return false;
+            else {
+                count1 = 0;
+                count2 = 0;
+                count3 = 0;
+                row.clear();
+                col.clear();
+                box.clear();
             }
         }
         return true;
