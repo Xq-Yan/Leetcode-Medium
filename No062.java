@@ -28,7 +28,7 @@ Output: 28
 
 class Solution {
     public static int uniquePaths(int m, int n) {
-        if (m == 0 || n == 0) return 0;
+        /*if (m == 0 || n == 0) return 0;
         if (m == 1 || n == 1) return 1;
         if (m < n) {
             int temp = m;
@@ -43,6 +43,17 @@ class Solution {
         for (int i = start; i <= end; i++) {
             fac *= i;
         }
-        return fac;
+        return fac;*/
+        int[][] temp = new int[m][n];
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == 0 || j == 0) {
+                    temp[i][j] = 1;
+                } else {
+                    temp[i][j] = temp[i - 1][j] + temp[i][j - 1];
+                }
+            }
+        }
+        return temp[m - 1][n - 1];
     }
 }
